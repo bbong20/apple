@@ -10,7 +10,7 @@ public class DifficultySelect : MonoBehaviour
         PlayerPrefs.SetString("Difficulty", "Easy");
 
         // GameScene이라는 이름의 씬으로 이동
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("EasyGameScene");
     }
 
     // Hard 모드를 선택했을 때 호출되는 함수

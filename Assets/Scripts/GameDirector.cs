@@ -64,8 +64,10 @@ public class GameDirector : MonoBehaviour                // GameDirector 클래스�
         this.nPoint /= 2;                                // 점수 절반 감소
     }
 
-    public void GetGoldApple()
+    public void GetGoldApple()                          // 황금사과 먹었을 때 점수 증가 함수
     {
-        this.nPoint += 50;
+        this.nPoint += 50;                              // 점수 50점 증가
     }
+
+    
 }
