@@ -17,6 +17,9 @@ public class GameDirector : MonoBehaviour                // GameDirector Å¬·¡½º´
 
     void Start()                                         // °ÔÀÓÀÌ ½ÃÀÛµÉ ¶§ ÇÑ ¹ø È£ÃâµÇ´Â ÇÔ¼ö
     {
+        fGameTime = 10.0f;                               // ÀüÃ¼ °ÔÀÓ ½Ã°£ ¼³Á¤
+        fTimer = fGameTime;                              // Å¸ÀÌ¸Ó ÃÊ±âÈ­
+
         this.gTimerText = GameObject.Find("Timer");      // "Timer" ¿ÀºêÁ§Æ®¸¦ Ã£¾Æ¼­ º¯¼ö¿¡ ÀúÀå
         this.gPointText = GameObject.Find("Point");      // "Point" ¿ÀºêÁ§Æ®¸¦ Ã£¾Æ¼­ º¯¼ö¿¡ ÀúÀå
         this.gGenerator = GameObject.Find("ItemGenerator"); // "ItemGenerator" ¿ÀºêÁ§Æ®¸¦ ÀúÀå
@@ -36,9 +39,17 @@ public class GameDirector : MonoBehaviour                // GameDirector Å¬·¡½º´
                 bStopped = true;                          // Áßº¹ ¹æÁö ÇÃ·¡±× ¼³Á¤
 
                 nFinalPoint = nPoint;                     // ÃÖÁ¾ Á¡¼ö¸¦ static º¯¼ö¿¡ ÀúÀå
-                Debug.Log(nFinalPoint);
+
+                string difficulty = PlayerPrefs.GetString("Difficulty", "Easy"); // ÇöÀç ³­ÀÌµµ °¡Á®¿À±â (±âº»°ª Easy)
+                string key = difficulty + "_HighScore";   // Å° ÀÌ¸§À» ³­ÀÌµµ ±â¹ÝÀ¸·Î »ý¼º (¿¹: Easy_HighScore)
+                int highScore = PlayerPrefs.GetInt(key, 0); // ÀúÀåµÈ ÃÖ°í Á¡¼ö ºÒ·¯¿À±â (¾øÀ¸¸é 0)
+
+                if (nPoint > highScore)                   // ÇöÀç Á¡¼ö°¡ ÃÖ°í Á¡¼öº¸´Ù Å©¸é
+                {
+                    PlayerPrefs.SetInt(key, nPoint);      // ÃÖ°í Á¡¼ö °»½ÅÇØ¼­ ÀúÀå
+                }
+
                 SceneManager.LoadScene("ResultScene");    // °á°ú ¾ÀÀ¸·Î ÀüÈ¯
-                Debug.Log("Å¸ÀÌ¸Ó ³¡! ¾À ÀüÈ¯ ½Ãµµ");      // µð¹ö±× ¸Þ½ÃÁö Ãâ·Â
             }
         }
 
@@ -64,10 +75,8 @@ public class GameDirector : MonoBehaviour                // GameDirector Å¬·¡½º´
         this.nPoint /= 2;                                // Á¡¼ö Àý¹Ý °¨¼Ò
     }
 
-    public void GetGoldApple()                          // È²±Ý»ç°ú ¸Ô¾úÀ» ¶§ Á¡¼ö Áõ°¡ ÇÔ¼ö
+    public void GetGoldApple()                           // È²±Ý»ç°ú ¸Ô¾úÀ» ¶§ Á¡¼ö Áõ°¡ ÇÔ¼ö
     {
-        this.nPoint += 50;                              // Á¡¼ö 50Á¡ Áõ°¡
+        this.nPoint += 50;                               // Á¡¼ö 50Á¡ Áõ°¡
     }
-
-    
 }
