@@ -24,6 +24,11 @@ public class BasketController : MonoBehaviour
             this.aud.PlayOneShot(this.appleSE); // 사과 획득 사운드 재생
             this.gDirector.GetComponent<GameDirector>().GetApple(); // GameDirector의 GetApple 메소드 호출
         }
+        else if(other.gameObject.tag == "GoldApple")    //황금사과 충돌
+        {
+            this.aud.PlayOneShot(this.appleSE); // 사과 획득 사운드 재생
+            this.gDirector.GetComponent<GameDirector>().GetGoldApple(); // GameDirector의 GetApple 메소드 호출
+        }
         else
         {
             this.aud.PlayOneShot(this.bombSE); // 폭탄 획득 사운드 재생
